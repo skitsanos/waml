@@ -1,0 +1,10 @@
+#summary This page gives some explanations on UI objects currently supported
+
+= WAML UI Objects =
+
+  * wa:Button
+  * wa:LinkedButton
+  * wa:Tabs
+  * wa:Window
+
+
