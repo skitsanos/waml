@@ -1,0 +1,42 @@
+<html>
+    <head>
+    <title>Flash Bridge Sample</title>
+    <style>
+        
+    body { 
+        margin: 0px;
+        overflow:hidden 
+    }
+
+    textarea {
+        font-size: 1em;
+    }
+    </style>
+    <script src="FABridge.js" ></script>
+    <script src="FABridgeSample.js" ></script>
+</head>
+<body scroll='no' style="font-size:.9em;">
+    <div style="width:1024px">        
+        <div style="margin-top:20px;width:auto">
+                <object id='flexApp' classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,5,0,0' height='400' width='400'>
+                    <param name='flashvars' value='bridgeName=example'/>
+                    <param name='src' value='fab.swf'/>
+                    <embed name='flexApp' pluginspage='http://www.macromedia.com/go/getflashplayer' src='fab.swf' height='400' width='400' flashvars='bridgeName=example'/>
+                </object>
+        </div>
+        <script type="text/javascript>
+        var flexApp = FABridge.example.root();
+		var spr = FABridge.example.create("flash.display.Sprite");
+		trace(spr);
+		var g = spr.getGraphics();
+		g.beginFill(0xFF0000);
+		g.lineStyle(2,2);
+		g.drawRect(-100,-100,200,200);
+		g.endFill();
+		flexApp.addChild(spr);
+		spr.setX(300);
+		spr.setY(300);	
+        </script>
+    </div>
+</body>
+</html>
