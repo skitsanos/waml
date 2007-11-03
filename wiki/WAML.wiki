@@ -1,17 +1,22 @@
 #summary WAML RIA Framework.
 
+= Common JavaScript Extensions = 
+
+ * *String.trim* - returns the given string trimmed of whitespace
+ * *String.repeat(n)* - return the given string repeated n-times
+
 = Waml.Utils =
 
-* Waml.Utils.hex2dec
+ * Waml.Utils.hex2dec
 
-* Waml.Utils.dec2hex
+ * Waml.Utils.dec2hex
 
-* Waml.Utils.color
+ * Waml.Utils.color
 
-* Waml.Utils.includeJs
+ * Waml.Utils.includeJs
 
-* Waml.Utils.includeCss
+ * Waml.Utils.includeCss
 
-* Waml.Utils.XmlToJson
+ * Waml.Utils.XmlToJson
 
 = Waml.Dom = 
