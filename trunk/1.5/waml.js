@@ -138,7 +138,7 @@ Date.prototype.format = function(formatStr) {
  */
 
 var Waml;if (!Waml) {Waml = {};}
-Waml.version = "1.5.10202007";
+Waml.version = "1.5.11032007";
 
 if (!Waml.Browser) {Waml.Browser = {};}
 
