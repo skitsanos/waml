@@ -1,0 +1,27 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title>Untitled Document</title>
+		<script type="text/javascript" src="../waml.js"></script>
+		
+		<script type="text/javascript">
+			Waml.Events.attach(window, "load", function(){
+				Waml.Events.attach(window, "keyup", function(ev){				
+					ev = ev || window.event;
+					keyCode = Number(ev.keyCode) || Number(ev.which);
+					if (keyCode == 27)
+					{
+						alert("pressed");
+					}
+				});
+			});	
+		</script>
+	</head>
+	<body>
+		<div id="workspace" style="border: solid 1px #ff6600; width: 400px; height: 400px;">
+			
+			
+		</div>
+	</body>
+</html>

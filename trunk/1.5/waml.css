@@ -1,0 +1,59 @@
+*
+	{
+		font-family:Geneva, Arial, Helvetica, sans-serif;
+		font-size:9pt;
+	}
+body
+	{
+		margin:0;
+		padding:0;
+	}
+.waml-error
+	{
+		position:absolute;
+		padding:10px;
+		background-image:url(/waml/resources/images/error.png);
+		background-repeat:no-repeat; 
+		padding-left:25px; 
+		background-position:5px 10px;
+		top:0;left:35%; width:50%;border:dotted 1px #800;
+		font-family:Geneva, Arial, Helvetica, sans-serif;font-size:8pt;color:#800; font-weight:bold;
+		background-color:#ffffee;
+		/*filter: alpha(opacity='70');-moz-opacity: 0.7;*/
+	}
+#HttpProgress
+	{
+		position:absolute;		
+		left:45%;
+		top:45%;
+		height:18px;
+		z-index:9999;
+		background-color:#fff;
+		color:#666;
+		border:1px dotted #98c0f4;
+		background-image:url(/waml/resources/images/indicator_flower.gif);
+		background-repeat:no-repeat;
+		background-position:5px 5px;
+		font-size:10pt;
+		padding:5px;
+		padding-left:25px;
+				
+	}
+#custom {
+    cursor:move;
+}
+#custom-rzwrap{
+    z-index: 100;
+}
+#custom-rzwrap .x-resizable-handle{
+    width:11px;
+    height:11px;
+    background:transparent url(/waml/yui-ext/resources/images/sizer/square.gif) no-repeat;
+    margin:0px;
+}
+#custom-rzwrap .x-resizable-handle-east, #custom-rzwrap .x-resizable-handle-west{
+    top:45%;
+}
+#custom-rzwrap .x-resizable-handle-north, #custom-rzwrap .x-resizable-handle-south{
+    left:45%;
+}

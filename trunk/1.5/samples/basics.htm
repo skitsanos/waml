@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wa="http://grafeio.eu/waml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Untitled Document</title>
+		<link rel="stylesheet" type="text/css" href="../waml.css" />
+		<script type="text/javascript" src="../waml.js"></script>
+			
+		<script type="text/javascript">
+			var Skitsanos;if (!Skitsanos) {Skitsanos = {};}
+			Skitsanos.Utils = {};
+			
+			Waml.Application.home = "./"
+			Waml.Application.title("WAML Basics");
+			
+			alert(Waml.Application.params("ddd"));
+			
+			//Post data to the url and return reply from server into text container
+			Waml.Http.open("POST", "/waml/rpc.aspx", true, function(req){				
+				$("FrontPage").innerHTML = req.responseText;
+			}, function(req){
+				$("FrontPage").innerHTML = req.responseText;
+			},{postData: "xx=111&bbb=222"});	
+			
+			
+						
+			/*Waml.Events.attach(window, "load", function(){
+				alert("loaded");
+			});
+			*/
+			/*Waml.Events.attach(window, "resize", function(){
+				var fp = document.getElementById("FrontPage");
+				fp.style.height = (Waml.Browser.getViewport()[1]-Waml.Browser.getScroll()[1])+"px";
+			});
+			*/
+			
+			
+												
+			/**
+			 * Including external JavaScript Resources in WAML
+			 */
+			//Waml.Utils.includeJs("docwrite.js");
+			//Waml.Utils.includeJs("docwrite2.js");
+			//Waml.Utils.includeJs("docwrite.js");
+		</script>
+	</head>
+	<body>
+		<div id="FrontPage" style="border: solid 1px #ff0000; width: 900px;">
+		crap...
+		</div>
+	</body>
+</html>
