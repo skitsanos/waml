@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+  <!-- Output SWF options -->
+  <output>
+    <movie disabled="False" />
+    <movie input="" />
+    <movie path="Waml.swf" />
+    <movie fps="21" />
+    <movie width="300" />
+    <movie height="300" />
+    <movie version="9" />
+    <movie background="#FFFFFF" />
+  </output>
+  <!-- Other classes to be compiled into your SWF -->
+  <classpaths>
+    <class path="classes" />
+  </classpaths>
+  <!-- Build options -->
+  <build>
+    <option accessible="False" />
+    <option actionscriptFileEncoding="iso-8859-1" />
+    <option allowSourcePathOverlap="False" />
+    <option as3="True" />
+    <option benchmark="False" />
+    <option debug="False" />
+    <option es="False" />
+    <option generateFrameLoader="False" />
+    <option headlessServer="False" />
+    <option incremental="True" />
+    <option keepAllTypeSelectors="False" />
+    <option keepGeneratedActionScript="False" />
+    <option linkReport="" />
+    <option loadConfig="" />
+    <option optimize="False" />
+    <option showActionScriptWarnings="True" />
+    <option showBindingWarnings="True" />
+    <option showDeprecationWarnings="True" />
+    <option showUnusedTypeSelectorWarnings="True" />
+    <option strict="True" />
+    <option useNetwork="True" />
+    <option useResourceBundleMetadata="True" />
+    <option warnings="True" />
+    <option verboseStackTraces="False" />
+  </build>
+  <!-- Class files to compile (other referenced classes will automatically be included) -->
+  <compileTargets>
+    <compile path="classes\Main.as" />
+  </compileTargets>
+  <!-- Paths to exclude from the Project Explorer tree -->
+  <hiddenPaths>
+    <!-- example: <hidden path="..." /> -->
+  </hiddenPaths>
+  <!-- Executed before build -->
+  <preBuildCommand />
+  <!-- Executed after build -->
+  <postBuildCommand alwaysRun="False" />
+  <!-- Other project options -->
+  <options>
+    <option showHiddenPaths="False" />
+    <option testMovie="NewTab" />
+  </options>
+</project>
