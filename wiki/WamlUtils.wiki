@@ -1,3 +1,10 @@
 #summary WAML Utilities.
 
 = Waml.Utils =
+
+* Waml.Utils.hex2dec
+* Waml.Utils.dec2hex
+* Waml.Utils.color
+* Waml.Utils.includeJs
+* Waml.Utils.includeCss
+* Waml.Utils.XmlToJson
