@@ -61,7 +61,7 @@ function $v(something) {
  * Extended Strings
  */
 String.prototype.trim = function() {
-	var result = this.match(/^ *(.*?) *$/);
+	var result = this.match(/^(\s*|\n*)*(.*?)(\W*)$/);
 	return (result ? result[1] : this);
 };
 
