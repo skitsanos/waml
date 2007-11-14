@@ -440,7 +440,6 @@ Waml.Utils.XmlToJson = function(xml)
 					result[xml.childNodes[i].nodeName] = Waml.Utils.XmlToJson(xml.childNodes[i]);}
 			}
 		}
-		console.info(result);
 		
 		if(xml.attributes)
 		{			
