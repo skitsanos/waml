@@ -426,7 +426,7 @@ Waml.Utils.XmlToJson = function(xml)
 			result = xml.childNodes[0].nodeValue;
 		}else if(xml.documentElement){
 			result = {};
-			result[xml.documentElement.nodeName] = foo.Utils.convertXMLToJSON(xml.documentElement);
+			result[xml.documentElement.nodeName] = Waml.Utils.convertXMLToJSON(xml.documentElement);
 		}else{
 			result = {};
 			for(var i=0; i<xml.childNodes.length; i++) {
@@ -434,9 +434,9 @@ Waml.Utils.XmlToJson = function(xml)
 					if(!(result[xml.childNodes[i].nodeName] instanceof Array))
 					{
 						result[xml.childNodes[i].nodeName] = [result[xml.childNodes[i].nodeName]];}
-					result[xml.childNodes[i].nodeName].push(foo.Utils.convertXMLToJSON(xml.childNodes[i]));
+					result[xml.childNodes[i].nodeName].push(Waml.Utils.convertXMLToJSON(xml.childNodes[i]));
 				}else if(xml.childNodes[i].nodeName.indexOf('#') == -1){
-					result[xml.childNodes[i].nodeName] = foo.Utils.convertXMLToJSON(xml.childNodes[i]);}
+					result[xml.childNodes[i].nodeName] = Waml.Utils.convertXMLToJSON(xml.childNodes[i]);}
 			}
 		}
 		
