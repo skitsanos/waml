@@ -21,7 +21,7 @@
 				var xmldso = Waml.Utils.XmlToJson(req.responseXML);
 				$("divStatus").innerHTML += "<p />" + xmldso.Dataset.Shelf["@label"] + "(" + xmldso.Dataset.Shelf["@label"].length + ")";
 			}, function(req){
-				$("divStatus").innerHTML = req.responseText;
+				$("divStatus").innerHTML = "Fault: #" + req.status;
 			},{postData: "xx=111&bbb=222"});
 		</script>		
 	</body>
