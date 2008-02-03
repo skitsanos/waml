@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Untitled Document</title>
+		<meta name="author" content="Skitsanos.com" />
+		<script type="text/javascript" src="../xmlhttp.js"></script>
+		<script type="text/javascript" src="../waml.js"></script>
+	</head>
+	<body>
+		<div id="divStatus">Loading...</div>
+		<script type="text/javascript">
+			Waml.Application.title("Loading and Parsing XML Dataset sample");
+			/**
+			 * this sample loads XML data from sampledata.xml file and 
+			 */
+			
+						
+			Waml.Http.open("GET", "sampledata.xml", true, function(req){				
+				$("divStatus").innerHTML = "Sample Data loaded";
+				var xmldso = Waml.Utils.XmlToJson(req.responseXML);
+				$("divStatus").innerHTML += "<p />" + xmldso.Dataset.Shelf["@label"] + "(" + xmldso.Dataset.Shelf["@label"].length + ")";
+			}, function(req){
+				$("divStatus").innerHTML = req.responseText;
+			},{postData: "xx=111&bbb=222"});
+		</script>		
+	</body>
+</html>

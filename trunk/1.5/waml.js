@@ -486,7 +486,7 @@ Waml.Application.params  = function(arg, frame){
 };
 
 Waml.Application.init = function (){	
-		Waml.Utils.includeJs(Waml.Application.home+"/xmlhttp.js");
+		//Waml.Utils.includeJs(Waml.Application.home+"/xmlhttp.js");
 };
 
 //Now init WAML
