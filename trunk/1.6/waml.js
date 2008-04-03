@@ -291,6 +291,7 @@ Waml.Browser.is_mozilla  = function(){return navigator.userAgent.toLowerCase().i
 Waml.Browser.is_opera    = function(){return navigator.userAgent.match(/Opera/);};
 Waml.Browser.is_webkit   = function(){return (navigator.userAgent.match(/AppleWebKit/));};
 Waml.Browser.is_mac      = function(){return (navigator.platform.toString().match(/mac/i));};
+Waml.Browser.language 	 = function(){return navigator.language;}
 
 
 Waml.Browser.getViewport = function(){
