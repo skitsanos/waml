@@ -10,7 +10,10 @@ function $(something) {
 	}
 	if (something instanceof Array) {
 		elm = [];
-		for (var i=0;i<something.length;i++) { elm.push($(something[i])); }
+		for (var i=0; i<something.length; i++) 
+		{
+			elm.push($(something[i])); 
+		}
 	}
 	if (!elm)
 	{
@@ -200,3 +203,109 @@ Date.prototype.format = function(formatStr) {
 	result = result.replace(/Y/,this.getFullYear());	
 	return result;
 };
+
+/**
+ * Waml.Application
+ */
+if (!Waml.Application) {Waml.Application = {};}
+
+Waml.Application.home ="/waml";
+Waml.Application.modules = [];
+Waml.Application.warn    = function(msg){alert(msg);};
+Waml.Application.title   = function(msg){window.document.title = msg;};
+Waml.Application.debugMode = false;
+Waml.Application.params   = function(arg, frame){
+	var ret = ""; 
+	var qs = ""; 
+	var href= "";
+	
+	if (frame === undefined)
+	{
+		href = window.location.href;
+	}
+	else
+	{
+		href = parent.frames[frame].location.href;
+	}	
+		
+	if (href.indexOf("?") > -1 ){		
+		qs = href.substr(href.indexOf("?")).toLowerCase();
+		if (qs.startsWith("?"))
+		{
+			qs = qs.substr(2,qs.length-1);
+		}
+		var args = qs.split("&");		
+		for (var i = 0; i < args.length; i++ ){
+			var aParam = args[i].split("=");
+			if (aParam[0] == arg){
+				ret = aParam[1];
+				break;
+			}						
+		}	
+	}			
+	return ret; 
+};
+
+Waml.Application.include = function(url)
+{
+	if (Waml.Application.modules.find(url) == -1)
+	{
+		document.write( '<scr' + 'ipt type="text/javascript" src="' + url + '"><\/scr' + 'ipt>' ) ;
+		Waml.Application.modules.push(url);		
+	}		
+};
+
+Waml.Application.Style = {};
+Waml.Application.Style.getCSSRule = function(ruleName, deleteFlag) 
+{
+   ruleName=ruleName.toLowerCase(); 
+   if (document.styleSheets) {      
+      for (var i=0; i<document.styleSheets.length; i++) { 
+         var styleSheet=document.styleSheets[i];
+         var ii=0;                              
+         var cssRule=false;                      
+         do {                                   
+            if (styleSheet.cssRules) {          
+               cssRule = styleSheet.cssRules[ii];
+            } else {                             
+               cssRule = styleSheet.rules[ii];    
+            }                                    
+            if (cssRule)  {                      
+               if (cssRule.selectorText.toLowerCase()==ruleName) { 
+                  if (deleteFlag=='delete') {    
+                     if (styleSheet.cssRules) {  
+                        styleSheet.deleteRule(ii);
+                     } else {                     
+                        styleSheet.removeRule(ii);
+                     }                            
+                     return true;                 
+                  } else {                        
+                     return cssRule;              
+                  }                               
+               }                                  
+            }                                     
+            ii++;                                 
+         } while (cssRule)                        
+      }                                           
+   }                                              
+   return false;                                  
+}                    
+
+Waml.Application.Style.addCSSRule = function(ruleName)
+{       
+  if (document.styleSheets) {        
+    if (!Waml.Application.Style.getCSSRule(ruleName)) {    
+      if (document.styleSheets[0].addRule) {       
+        document.styleSheets[0].addRule(ruleName, null,0);
+      } else {                   
+        document.styleSheets[0].insertRule(ruleName+' { }', 0);
+      }        
+    }           
+  }              
+  return Waml.Application.Style.getCSSRule(ruleName);   
+};
+
+Waml.Application.Style.killCSSRule = function (ruleName) 
+{     
+  return Waml.Application.Style.getCSSRule(ruleName,'delete');  
+}; 
