@@ -36,12 +36,12 @@ Waml.Dom.append = function() {
 				parent.appendChild($(arr[j]));
 			}
 		}
-	};	
-Waml.Dom.hide = function(element) {
-		
-	};	
-Waml.Dom.show = function(element) {
-		
+	};
+	Waml.Dom.hide = function(element) {
+		element.style.display = "none";
+	};
+	Waml.Dom.show = function(element) {
+		element.style.display = "";
 	};
 Waml.Dom.clear = function(element) {
 		var elm = $(element);
