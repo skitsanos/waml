@@ -37,8 +37,8 @@ Waml.Dom.append = function() {
 			}
 		}
 	};
-	Waml.Dom.hide = function(element) {
-	element.style.display = "none";	
+	Waml.Dom.hide = function(_e) {
+	_e.style.display = "none";	
 	};
 	Waml.Dom.show = function(element) {
 		element.style.display = "";
