@@ -7,15 +7,16 @@
 if (!Waml) {alert('waml.core.js missing');}
 if (!Waml.Browser) {Waml.Browser = {};}
 
-Waml.Browser.is_safari   = function(){return navigator.userAgent.toLowerCase().indexOf('safari') != -1;};	
-Waml.Browser.is_konq     = function(){return navigator.userAgent.toLowerCase().indexOf('konqueror')!= -1;};		
-Waml.Browser.is_khtml    = function(){return Waml.Browser.is_safari || Waml.Browser.is_konq;};	
-Waml.Browser.is_ie       = function(){return navigator.userAgent.toLowerCase().indexOf("msie") != -1;};
-Waml.Browser.is_ie7      = function(){return navigator.userAgent.match(/msie 7/i);};
-Waml.Browser.is_mozilla  = function(){return navigator.userAgent.toLowerCase().indexOf("gecko") != -1;};
-Waml.Browser.is_opera    = function(){return navigator.userAgent.match(/Opera/);};
-Waml.Browser.is_webkit   = function(){return (navigator.userAgent.match(/AppleWebKit/));};
-Waml.Browser.is_mac      = function(){return (navigator.platform.toString().match(/mac/i));};
+Waml.Browser.isSafari   = function(){return navigator.userAgent.toLowerCase().indexOf('safari') != -1;};	
+Waml.Browser.isKonq     = function(){return navigator.userAgent.toLowerCase().indexOf('konqueror')!= -1;};		
+Waml.Browser.isKhtml    = function(){return Waml.Browser.is_safari || Waml.Browser.is_konq;};	
+Waml.Browser.isIe       = function(){return navigator.userAgent.toLowerCase().indexOf("msie") != -1;};
+Waml.Browser.isIe7      = function(){return navigator.userAgent.match(/msie 7/i);};
+Waml.Browser.isMozilla  = function(){return navigator.userAgent.toLowerCase().indexOf("gecko") != -1;};
+Waml.Browser.isOpera    = function(){return navigator.userAgent.match(/Opera/);};
+Waml.Browser.isWebkit   = function(){return (navigator.userAgent.match(/AppleWebKit/));};
+Waml.Browser.isMac = function() { return (navigator.platform.toString().match(/mac/i)); };
+Waml.Browser.isChrome = function() { return navigator.userAgent.toLowerCase().indexOf('chrome') != -1;};
 
 
 Waml.Browser.getViewport = function(){
