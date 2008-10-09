@@ -26,23 +26,23 @@ Waml.Dom.createNS = function(ns,tagName)
 	return elm;
 };	
 
-Waml.Dom.append = function() {
-		for (var i=0;i<arguments.length;i++) {
-			var arr = arguments[i];
-			if (!(arr instanceof Array)) { continue; }
-			if (arr.length < 2) { continue; }
-			var parent = $(arr[0]);
-			for (var j=1;j<arr.length;j++) {
-				parent.appendChild($(arr[j]));
-			}
+Waml.Dom.append = function() 
+{
+	for (var i=0;i<arguments.length;i++) 
+	{
+		var arr = arguments[i];
+		if (!(arr instanceof Array)) { continue; }
+		if (arr.length < 2) { continue; }
+		var parent = $(arr[0]);
+		for (var j=1;j<arr.length;j++) 
+		{
+			parent.appendChild($(arr[j]));
 		}
-	};
-	Waml.Dom.hide = function(element) {
-	element["style"].display = "none";	
-	};
-	Waml.Dom.show = function(element) {
-		element.style.display = "";
-	};
+	}
+};
+
+Waml.Dom.hide = function(element){element.display = "none";};
+Waml.Dom.show = function(element) {element.style.display = "";};
 Waml.Dom.clear = function(element) {
 		var elm = $(element);
 		while (elm.firstChild) { elm.removeChild(elm.firstChild); }
