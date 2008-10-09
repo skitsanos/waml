@@ -41,8 +41,8 @@ Waml.Dom.append = function()
 	}
 };
 
-Waml.Dom.hide = function(element){element.display = "none";};
-Waml.Dom.show = function(element) {element.style.display = "";};
+Waml.Dom.hide = function(el){el.display = "none";};
+Waml.Dom.show = function(el) {el.style.display = "";};
 Waml.Dom.clear = function(element) {
 		var elm = $(element);
 		while (elm.firstChild) { elm.removeChild(elm.firstChild); }
