@@ -47,10 +47,7 @@ Waml.Dom.hide = function(element) {
 			return;
 		}
 		var elm = $(element);
-		/* ie input hack */
-		//var inputs_ = elm.getElementsByTagName("input");
 		var inputs = [];
-		for (var i=0;i<inputs_.length;i++) { inputs.push(inputs_[i]); }
 		if (elm.tagName.toLowerCase() == "input") { inputs.push(elm); }
 		for (var i=0;i<inputs.length;i++) {
 			var inp = inputs[i];
