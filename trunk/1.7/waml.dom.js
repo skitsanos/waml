@@ -38,10 +38,10 @@ Waml.Dom.append = function() {
 		}
 	};
 	Waml.Dom.hide = function(element) {
-		element.style.display = "none";
+	$(element).style.visibility = "hidden";
 	};
 	Waml.Dom.show = function(element) {
-		element.style.display = "";
+		$(element).style.display = "";
 	};
 Waml.Dom.clear = function(element) {
 		var elm = $(element);
