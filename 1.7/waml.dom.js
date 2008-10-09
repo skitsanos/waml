@@ -38,51 +38,10 @@ Waml.Dom.append = function() {
 		}
 	};	
 Waml.Dom.hide = function(element) {
-		if (arguments.length > 1) {
-			for (var i=0;i<arguments.length;i++) { Waml.Dom.hide(arguments[i]); }
-			return;
-		}
-		if (element instanceof Array) {
-			for (var i=0;i<element.length;i++) { Waml.Dom.hide(element[i]); }
-			return;
-		}
-		var elm = $(element);
-		var inputs = [];
-		if (elm.tagName.toLowerCase() == "input") { inputs.push(elm); }
-		for (var i=0;i<inputs.length;i++) {
-			var inp = inputs[i];
-			if (inp.type == "radio" || inp.type == "checkbox") {
-				if (!inp.__checked) { inp.__checked = (inp.checked ? "1" : "0"); }
-			}
-		} 
-		/* */
-		elm.style.display = "none";
+		
 	};	
 Waml.Dom.show = function(element) {
-		if (arguments.length > 1) {
-			for (var i=0;i<arguments.length;i++) { Waml.Dom.show(arguments[i]); }
-			return;
-		}
-		if (element instanceof Array) {
-			for (var i=0;i<element.length;i++) { Waml.Dom.show(element[i]); }
-			return;
-		}
-		var elm = $(element);
-		elm.style.display = "";
-		/* ie input hack */
-		var inputs_ = elm.getElementsByTagName("input");
-		var inputs = [];
-		for (var i=0;i<inputs_.length;i++) { inputs.push(inputs_[i]); }
-		if (elm.tagName.toLowerCase() == "input") { inputs.push(elm); }
-		for (var i=0;i<inputs.length;i++) {
-			var inp = inputs[i];
-			if (inp.type == "radio" || inp.type == "checkbox") {
-				if (inp["__checked"] && inp.__checked === "1") { inp.checked = true; }
-				if (inp["__checked"] && inp.__checked === "0") { inp.checked = false; }
-				inp.__checked = false;
-			}
-		} 
-		/* */
+		
 	};
 Waml.Dom.clear = function(element) {
 		var elm = $(element);
