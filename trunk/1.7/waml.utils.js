@@ -1,4 +1,4 @@
-﻿if (!Waml) {alert('waml.core.js missing');}
+if (!Waml) {alert('waml.core.js missing');}
 if (!Waml.Utils) {Waml.Utils = {};}
 
 Waml.Utils.defined = function(obj) {return typeof obj != 'undefined';};
