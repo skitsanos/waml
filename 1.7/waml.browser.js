@@ -87,9 +87,7 @@ Waml.Browser.Cookies.setCookie = function(name, value, expires, options) {
 };
 
 Waml.Browser.params = function() {
-    if (document.URL.toString().indexOf("?") > 0) {
-        var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(document.location.href);
-        return results[1] || 0;
-    }
-    else { return undefined; }
+    var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(document.location.href);
+    if (results == null) { return undefined; }
+    else { return results[1] || 0; }
 };
