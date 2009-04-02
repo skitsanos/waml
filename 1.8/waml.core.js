@@ -173,16 +173,16 @@ Date.prototype.format = function(formatStr) {
  Collection = function() {
      var lsize = 0;
 
-     add: function (newItem) {
+     this.add = function(newItem) {
          if (newItem == null)
          { return; }
          else {
              lsize++;
              this[(lsize - 1)] = newItem;
          }
+     };
 
-     },
-     remove: function (index) {
+     this.remove = function(index) {
          if (index < 0 || index > this.length - 1) return;
          this[index] = null;
 
@@ -191,25 +191,29 @@ Date.prototype.format = function(formatStr) {
              this[i] = this[i + 1];
 
          lsize--;
-     },
-     isEmpty: function() {
+     };
+
+     this.isEmpty = function() {
          return lsize == 0;
-     },
-     size:function() { return lsize; },
-     clear: function () {
+     };
+
+     this.size = function() { return lsize; };
+
+     this.clear = function() {
          for (var i = 0; i < lsize; i++)
              this[i] = null;
 
          lsize = 0;
-     },
-     clone: function () {
+     };
+
+     this.clone = function() {
          var c = new Collection();
 
          for (var i = 0; i < lsize; i++)
              c.add(this[i]);
 
          return c;
-     }
+     };
  };
 
 /**
