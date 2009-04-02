@@ -167,57 +167,50 @@ Date.prototype.format = function(formatStr) {
 };
 
  if (typeof Collection == 'undefined') {
-	Collection = {};
+     //};
  }
 
-(function() {
-    var lsize = 0;
+ Collection = function() {
+     var lsize = 0;
 
-    function add(newItem) {
-        if (newItem == null)
-        { return; }
-        else {
-            lsize++;
-            this[(lsize - 1)] = newItem;
-        }
+     add: function (newItem) {
+         if (newItem == null)
+         { return; }
+         else {
+             lsize++;
+             this[(lsize - 1)] = newItem;
+         }
 
-    }
+     },
+     remove: function (index) {
+         if (index < 0 || index > this.length - 1) return;
+         this[index] = null;
 
-    function remove(index) {
-        if (index < 0 || index > this.length - 1) return;
-        this[index] = null;
+         /* --reindex collection-- */
+         for (var i = index; i <= lsize; i++)
+             this[i] = this[i + 1];
 
-        /* --reindex collection-- */
-        for (var i = index; i <= lsize; i++)
-            this[i] = this[i + 1];
+         lsize--;
+     },
+     isEmpty: function() {
+         return lsize == 0;
+     },
+     size:function() { return lsize; },
+     clear: function () {
+         for (var i = 0; i < lsize; i++)
+             this[i] = null;
 
-        lsize--;
-    }
+         lsize = 0;
+     },
+     clone: function () {
+         var c = new Collection();
 
-    function isEmpty() {
-        return lsize == 0;
-    }
+         for (var i = 0; i < lsize; i++)
+             c.add(this[i]);
 
-
-
-    function size() { return lsize; }    /* --returns the size of the collection-- */
-
-    function clear() {
-        for (var i = 0; i < lsize; i++)
-            this[i] = null;
-
-        lsize = 0;
-    }
-
-    function _clone() {
-        var c = new Collection();
-
-        for (var i = 0; i < lsize; i++)
-            c.add(this[i]);
-
-        return c;
-    }
-}).call(Collection);
+         return c;
+     }
+ };
 
 /**
 * Waml.Application
