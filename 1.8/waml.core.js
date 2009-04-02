@@ -171,6 +171,7 @@ Date.prototype.format = function(formatStr) {
  }
 
  Collection = function() {
+     this.toString = function() {return '[Collection]' };
      this.size = 0;
 
      this.add = function(newItem) {
