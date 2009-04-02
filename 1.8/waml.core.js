@@ -166,54 +166,50 @@ Date.prototype.format = function(formatStr) {
 	return result;
 };
 
- if (typeof Collection == 'undefined') {
-     //};
- }
+var Collection = function() {
+    this.toString = function() { return '[Collection]' };
+    this.size = 0;
 
- Collection = function() {
-     this.toString = function() {return '[Collection]' };
-     this.size = 0;
+    this.add = function(newItem) {
+        if (newItem == null)
+        { return; }
+        else {
+            this.size++;
+            this[(this.size - 1)] = newItem;
+        }
+    };
 
-     this.add = function(newItem) {
-         if (newItem == null)
-         { return; }
-         else {
-             this.size++;
-             this[(this.size - 1)] = newItem;
-         }
-     };
+    this.remove = function(index) {
+        if (index < 0 || index > this.length - 1) return;
+        this[index] = null;
 
-     this.remove = function(index) {
-         if (index < 0 || index > this.length - 1) return;
-         this[index] = null;
+        /* --reindex collection-- */
+        for (var i = index; i <= this.size; i++)
+            this[i] = this[i + 1];
 
-         /* --reindex collection-- */
-         for (var i = index; i <= this.size; i++)
-             this[i] = this[i + 1];
+        this.size--;
+    };
 
-         this.size--;
-     };
+    this.isEmpty = function() {
+        return this.size == 0;
+    };
 
-     this.isEmpty = function() {
-         return this.size == 0;
-     };
+    this.clear = function() {
+        for (var i = 0; i < this.size; i++)
+            this[i] = null;
 
-     this.clear = function() {
-         for (var i = 0; i < this.size; i++)
-             this[i] = null;
+        this.size = 0;
+    };
 
-         this.size = 0;
-     };
+    this.clone = function() {
+        var c = new Collection();
 
-     this.clone = function() {
-         var c = new Collection();
+        for (var i = 0; i < this.size; i++)
+            c.add(this[i]);
 
-         for (var i = 0; i < this.size; i++)
-             c.add(this[i]);
-
-         return c;
-     };
- };
+        return c;
+    };
+} ();
 
 /**
 * Waml.Application
