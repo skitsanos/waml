@@ -197,7 +197,7 @@ Date.prototype.format = function(formatStr) {
          return lsize == 0;
      };
 
-     this.size = function() { return lsize; };
+     this.size = function get() { return lsize; };
 
      this.clear = function() {
          for (var i = 0; i < lsize; i++)
