@@ -166,59 +166,58 @@ Date.prototype.format = function(formatStr) {
 	return result;
 };
 
-var Collection() = function() {
-/* --CCollection object-- */
-     var lsize = 0;
+ if (typeof Collection == 'undefined') {
+	Collection = {};
+ }
 
-     this.add = _add;
-     this.remove = _remove;
-     this.isEmpty = _isEmpty;
-     this.size = _size;
-     this.clear = _clear;
-     this.clone = _clone;
+(function() {
+    var lsize = 0;
 
-     function _add(newItem) {
-     /* --adds a new item to the collection-- */
-          if (newItem == null) return;
+    function add(newItem) {
+        if (newItem == null)
+        { return; }
+        else {
+            lsize++;
+            this[(lsize - 1)] = newItem;
+        }
 
-          lsize++;
-          this[(lsize - 1)] = newItem;
-     }
+    }
 
-     function _remove(index) {
-     /* --removes the item at the specified index-- */
-          if (index < 0 || index > this.length - 1) return;
-          this[index] = null;
+    function remove(index) {
+        if (index < 0 || index > this.length - 1) return;
+        this[index] = null;
 
-          /* --reindex collection-- */
-          for (var i = index; i <= lsize; i++)
-               this[i] = this[i + 1];
+        /* --reindex collection-- */
+        for (var i = index; i <= lsize; i++)
+            this[i] = this[i + 1];
 
-          lsize--;
-     }
+        lsize--;
+    }
 
-     function _isEmpty() { return lsize == 0 }     /* --returns boolean if collection is/isn't empty-- */
+    function isEmpty() {
+        return lsize == 0;
+    }
 
-     function _size() { return lsize }     /* --returns the size of the collection-- */
 
-     function _clear() {
-     /* --clears the collection-- */
-          for (var i = 0; i < lsize; i++)
-               this[i] = null;
 
-          lsize = 0;
-     }
+    function size() { return lsize; }    /* --returns the size of the collection-- */
 
-     function _clone() {
-     /* --returns a copy of the collection-- */
-          var c = new CCollection();
+    function clear() {
+        for (var i = 0; i < lsize; i++)
+            this[i] = null;
 
-          for (var i = 0; i < lsize; i++)
-               c.add(this[i]);
+        lsize = 0;
+    }
 
-          return c;
-     }
-}
+    function _clone() {
+        var c = new Collection();
+
+        for (var i = 0; i < lsize; i++)
+            c.add(this[i]);
+
+        return c;
+    }
+}).call(Collection);
 
 /**
 * Waml.Application
