@@ -3,7 +3,7 @@
 * @author Skitsanos.com
 */
 var Waml; if (!Waml) { Waml = {}; }
-Waml.version = "1.8.04022009";
+Waml.version = "1.8.04232009";
 
 String.prototype.reverse = function() {
     var s = "";
