@@ -144,28 +144,6 @@ if (Array.prototype.push == null) {
 }
 
 /*
-* Extended Date
-*/
-/*Date.prototype.format = function(formatStr) {
-var result = formatStr;
-result = result.replace(/d/, this.getDate().toString().leadingZero(2));
-result = result.replace(/g/, parseInt(this.getHours(), 0) % 12);
-result = result.replace(/G/, this.getHours());
-result = result.replace(/h/, (parseInt(this.getHours(), 0) % 12).toString().leadingZero(2));
-result = result.replace(/H/, this.getHours().toString().leadingZero(2));
-result = result.replace(/i/, this.getMinutes().toString().leadingZero(2));
-result = result.replace(/j/, this.getDate());
-result = result.replace(/m/, (this.getMonth() + 1).toString().leadingZero(2));
-result = result.replace(/n/, this.getMonth() + 1);
-result = result.replace(/s/, this.getSeconds().toString().leadingZero(2));
-result = result.replace(/U/, this.getTime());
-result = result.replace(/w/, this.getDay());
-result = result.replace(/Y/, this.getFullYear());
-return result;
-};
-*/
-
-/*
 * Date Format 1.2.3
 * (c) 2007-2009 Steven Levithan <stevenlevithan.com>
 * MIT license
