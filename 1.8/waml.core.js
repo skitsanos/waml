@@ -156,14 +156,22 @@ Array.prototype.random = function() {
     return this[Math.floor((Math.random() * this.length))];
 };
 
-Array.prototype.filter = function(fnc) {
-    var a = new Array();
-    for (var i = 0; i < this.length; i++) {
-        if (fnc(this[i])) {
-            a.push(this[i]);
+Array.prototype.filter = function(fun /*, thisp*/) {
+    var len = this.length;
+    if (typeof fun != "function")
+        throw new TypeError();
+
+    var res = new Array();
+    var thisp = arguments[1];
+    for (var i = 0; i < len; i++) {
+        if (i in this) {
+            var val = this[i]; // in case fun mutates this
+            if (fun.call(thisp, val, i, this))
+                res.push(val);
         }
     }
-    return a;
+
+    return res;
 };
 
 Array.prototype.find = function(str) {
