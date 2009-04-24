@@ -80,47 +80,6 @@ Math.mod = function(val, mod) {
 * Extended Arrays 
 */
 Array.prototype.sortNum = function() { return this.sort(function(a, b) { return a - b; }); };
-Array.prototype.sortDate = function(d) {
-    var dateRE = /^(\d{2})[\/\- ](\d{2})[\/\- ](\d{4})/;
-    function dmyOrdA(a, b) {
-        a = a.replace(dateRE, "$3$2$1");
-        b = b.replace(dateRE, "$3$2$1");
-        if (a > b) return 1;
-        if (a < b) return -1;
-        return 0;
-    }
-    function dmyOrdD(a, b) {
-        a = a.replace(dateRE, "$3$2$1");
-        b = b.replace(dateRE, "$3$2$1");
-        if (a > b) return -1;
-        if (a < b) return 1;
-        return 0;
-    }
-    function mdyOrdA(a, b) {
-        a = a.replace(dateRE, "$3$1$2");
-        b = b.replace(dateRE, "$3$1$2");
-        if (a > b) return 1;
-        if (a < b) return -1;
-        return 0;
-    }
-    function mdyOrdD(a, b) {
-        a = a.replace(dateRE, "$3$1$2");
-        b = b.replace(dateRE, "$3$1$2");
-        if (a > b) return -1;
-        if (a < b) return 1;
-        return 0;
-    }
-
-    switch (d) {
-        case 'asc':
-            return this.sort(mdyOrdA);
-            break;
-
-        case 'desc':
-            return this.sort(mdyOrdD);
-            break;
-    }
-};
 
 Array.prototype.exists = function(x) {
     for (var i = 0; i < this.length; i++) {
