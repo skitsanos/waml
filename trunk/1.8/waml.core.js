@@ -390,11 +390,12 @@ Date.prototype.subtract = function( /**String*/unit, /**Number*/value) {
             break;
         case "second":
             this.setTime(this.getTime() - value * 1000);
-            break;   
+            break;
         default:
             this.setTime(this.getTime() - value);
             break;
     }
+    return this;
 };
 
 Date.prototype.truncate = function( /**String*/to) {
