@@ -329,7 +329,110 @@ Date.prototype.format = function(mask, utc) {
     return dateFormat(this, mask, utc);
 };
 
+Date.prototype.add = function( /**String*/unit, /**Number*/value) {
 
+    unit = unit.replace(/s$/).toLowerCase();
+
+    switch (unit) {
+        case "year":
+            this.setYear(this.getYear() + value);
+            break;
+        case "month":
+            this.setMonth(this.getMonth() + value);
+            break;
+        case "week":
+            this.setTime(this.getTime() + value * 604800000);
+            break;
+        case "day":
+            this.setTime(this.getTime() + value * 86400000);
+            break;
+        case "hour":
+            this.setTime(this.getTime() + value * 3600000);
+            break;
+        case "minute":
+            this.setTime(this.getTime() + value * 60000);
+            break;
+        case "second":
+            this.setTime(this.getTime() + value * 1000);
+            break;
+        case "nanosecond":
+            // Fall Through
+        default:
+            this.setTime(this.getTime() + value);
+            break;
+    }
+
+    return this;
+};
+
+Date.prototype.subtract = function( /**String*/unit, /**Number*/value) {
+
+    unit = unit.replace(/s$/).toLowerCase();
+
+    switch (unit) {
+        case "year":
+            this.setYear(this.getYear() - value);
+            break;
+        case "month":
+            this.setMonth(this.getMonth() - value);
+            break;
+        case "week":
+            this.setTime(this.getTime() - value * 604800000);
+            break;
+        case "day":
+            this.setTime(this.getTime() - value * 86400000);
+            break;
+        case "hour":
+            this.setTime(this.getTime() - value * 3600000);
+            break;
+        case "minute":
+            this.setTime(this.getTime() - value * 60000);
+            break;
+        case "second":
+            this.setTime(this.getTime() - value * 1000);
+            break;
+        case "nanosecond":
+            // Fall Through
+        default:
+            this.setTime(this.getTime() - value);
+            break;
+    }
+};
+
+Date.prototype.truncate = function( /**String*/to) {
+
+    unit = unit.replace(/s$/).toLowerCase();
+
+    switch (unit) {
+        case "year":
+            this.setMonth(0, 1);
+            this.setHours(0, 0, 0, 0);
+            break;
+        case "month":
+            this.setDate(1);
+            this.setHours(0, 0, 0, 0);
+            break;
+        case "week":
+            this.subtract("day", this.getDay());
+            break;
+        case "day":
+            this.setMinutes(0, 0, 0, 0);
+            break;
+        case "hour":
+            this.setMinutes(0, 0, 0);
+            break;
+        case "minute":
+            this.setSeconds(0, 0);
+            break;
+        case "second":
+            this.setMilliseconds(0);
+            break;
+        default:
+            break;
+    }
+
+    return this;
+};
 
 
 
