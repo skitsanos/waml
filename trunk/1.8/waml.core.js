@@ -390,9 +390,7 @@ Date.prototype.subtract = function( /**String*/unit, /**Number*/value) {
             break;
         case "second":
             this.setTime(this.getTime() - value * 1000);
-            break;
-        case "nanosecond":
-            // Fall Through
+            break;   
         default:
             this.setTime(this.getTime() - value);
             break;
