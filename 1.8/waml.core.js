@@ -433,6 +433,11 @@ Date.prototype.truncate = function( /**String*/to) {
     //return this;
 };
 
+Date.prototype.getMondaySunday = function() {
+function getMondaySunday(d) {
+    return [new Date(this).subtract('day', this.getDay() - 1), new Date(this).add('day', 7 - this.getDay())];
+}
+}
 
 
 var Collection = function() {
