@@ -430,7 +430,7 @@ Date.prototype.truncate = function( /**String*/to) {
             break;
     }
 
-    return this;
+    //return this;
 };
 
 
