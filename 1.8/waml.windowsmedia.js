@@ -67,7 +67,7 @@ else {
     }
 
     Waml.Media.MediaPlayer.prototype.setUiMode = function(mode) {
-        if (Waml.Browser.is_ie()) {
+        if (Waml.Browser.isIe()) {
             var ____player = Waml.Media.MediaPlayerManager.getPlayer(this.id);
             ____player.player.uiMode = mode;
         }
@@ -75,7 +75,7 @@ else {
 
     Waml.Media.MediaPlayer.prototype.play = function(url) {
         var ____player = Waml.Media.MediaPlayerManager.getPlayer(this.id);
-        if (this.version == Waml.Media.GUID.WM && Waml.Browser.is_ie()) {
+        if (this.version == Waml.Media.GUID.WM && Waml.Browser.isIe()) {
             ____player.player.enableErrorDialogs = "true";
             ____player.player.URL = url;
             ____player.player.controls.Play();
