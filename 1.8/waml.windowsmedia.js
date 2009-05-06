@@ -51,7 +51,7 @@ else {
         $('#' + containerId).html();
 
         if (Waml.Browser.isIe()) {
-            var _object = $('<object id="' + this.htmlObjectId + '" width="' + this.width + '" height="' + this.height + '" uiMode="mini" classid="clsid:' + this.version + '" type="application/x-oleobject"/>');
+            var _object = $('<object id="' + this.htmlObjectId + '" width="' + this.width + '" height="' + this.height + '" classid="clsid:' + this.version + '" type="application/x-oleobject"/>');
             this.player = _object;
             $('#' + containerId).append(_object);
         }
@@ -60,6 +60,9 @@ else {
             this.player = _embed;
             $('#' + containerId).append(_embed);
         }
+
+        var ____player = document[Waml.Media.MediaPlayerManager.getPlayer(this.id).player.attr('id')]
+        ____player.uiMode = "mini";
     }
 
     Waml.Media.MediaPlayer.prototype.setUiMode = function(mode) {
