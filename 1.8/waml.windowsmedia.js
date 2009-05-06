@@ -69,6 +69,7 @@ else {
 
     Waml.Media.MediaPlayer.prototype.play = function(url) {
         var ____player = document[Waml.Media.MediaPlayerManager.getPlayer(this.id).player.attr('id')];
+        ____player.stretchToFit = false;
         if (this.version == Waml.Media.GUID.WM && Waml.Browser.isIe()) {
             ____player.enableErrorDialogs = "true";
             ____player.URL = url;
