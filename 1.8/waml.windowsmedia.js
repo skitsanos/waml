@@ -45,12 +45,8 @@ else {
         this.height = height;
         this.fullScreen = false;
         this.stretchToFit = true;
-        if (version != null) {
-            this.version = Waml.Media.GUID.WM;
-        }
-        else {
-            this.version = Waml.Media.GUID.WM;
-        }
+
+        this.version = Waml.Media.GUID.WM;
 
         $('#' + containerId).html();
 
