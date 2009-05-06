@@ -35,14 +35,14 @@ else {
 
     if (!Waml.Media.MediaPlayerManagerInstance) { Waml.Media.MediaPlayerManagerInstance = new Waml.Media.MediaPlayerManager(); }
 
-    Waml.Media.MediaPlayer = function(containerId, version) {
+    Waml.Media.MediaPlayer = function(containerId, width, height) {
         //todo: plugin detect    
         this.id = Waml.Media.MediaPlayerManager.addPlayer(this);
         this.container = containerId;
         this.htmlObjectId = "mediaPlayer_" + containerId;
         this.showControls = false;
-        this.width = 400;
-        this.height = 300;
+        this.width = width;
+        this.height = height;
         this.fullScreen = false;
         this.stretchToFit = true;
         if (version != null) {
