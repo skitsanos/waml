@@ -62,7 +62,8 @@ else {
         }
 
         var ____player = document[Waml.Media.MediaPlayerManager.getPlayer(this.id).player.attr('id')]
-        ____player.uiMode = "mini";
+        ____player.uiMode = "none";
+        ____player.stretchToFit = true;
     }
 
     Waml.Media.MediaPlayer.prototype.setUiMode = function(mode) {
@@ -71,8 +72,7 @@ else {
     }
 
     Waml.Media.MediaPlayer.prototype.play = function(url) {
-        var ____player = document[Waml.Media.MediaPlayerManager.getPlayer(this.id).player.attr('id')];
-        ____player.stretchToFit = false;
+        var ____player = document[Waml.Media.MediaPlayerManager.getPlayer(this.id).player.attr('id')];        
         if (this.version == Waml.Media.GUID.WM && Waml.Browser.isIe()) {
             ____player.enableErrorDialogs = "true";
             ____player.URL = url;
