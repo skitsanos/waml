@@ -54,7 +54,7 @@ else {
 
         $('#' + containerId).html();
 
-        if (Waml.Browser.is_ie()) {
+        if (Waml.Browser.isIe()) {
             var _object = $('<object id="' + this.htmlObjectId + '" width="' + this.width + '" height="' + this.height + '" uiMode="mini" classid="clsid:' + this.version + '" type="application/x-oleobject"/>');
             this.player = _object;
             $('#' + containerId).append(_object);
