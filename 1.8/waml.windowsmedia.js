@@ -67,10 +67,8 @@ else {
     }
 
     Waml.Media.MediaPlayer.prototype.setUiMode = function(mode) {
-        if (Waml.Browser.isIe()) {
-            var ____player = Waml.Media.MediaPlayerManager.getPlayer(this.id);
-            ____player.player.uiMode = mode;
-        }
+        var ____player = document[Waml.Media.MediaPlayerManager.getPlayer(this.id).player.attr('id')];
+        ____player.uiMode = mode;
     }
 
     Waml.Media.MediaPlayer.prototype.play = function(url) {
