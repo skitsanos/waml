@@ -75,7 +75,7 @@ else {
 
     Waml.Media.MediaPlayer.prototype.play = function(url) {
         var ____player = Waml.Media.MediaPlayerManager.getPlayer(this.id);
-        alert(____player.player);
+        var p = ____player.player;
         if (this.version == Waml.Media.GUID.WM && Waml.Browser.isIe()) {
             ____player.player.enableErrorDialogs = "true";
             ____player.player.URL = url;
