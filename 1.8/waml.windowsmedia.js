@@ -46,7 +46,7 @@ else {
         this.fullScreen = false;
         this.stretchToFit = true;
         if (version != null) {
-            this.version = version;
+            this.version = Waml.Media.GUID.WM;
         }
         else {
             this.version = Waml.Media.GUID.WM;
