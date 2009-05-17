@@ -63,16 +63,25 @@
 
         $(this).val(pass);
     };
+    //:got
+    $.extend($.expr[':'], {
+        got: function(el, i, m) {
+            return ($(el).html() == m[3]);
+        }
+    });
     /*
     Calendar view
     */
     jQuery.fn.calendarView = function(options) {
+        var self = this;
+
         var defaults = {
             daysLabels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
             monthsLabels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
             month: new Date().getMonth(),
             year: new Date().getFullYear(),
-            busyDays: []
+            busyDays: [],
+            onSelect: function() { }
         };
 
         var options = $.extend(defaults, options);
@@ -106,7 +115,7 @@
         for (var i = 0; i < 9; i++) {
             // this loop is for weekdays (cells)
             for (var j = 0; j <= 6; j++) {
-                html += '<td class="calendar-day';
+                html += '<td class="calendarview-day';
                 if (options.busyDays.exists(new Date(options.year, options.month, day).format('mm/dd/yyyy'))) {
                     html += ' caledarview-busy';
                 }
@@ -127,5 +136,15 @@
         html += '</tr></table>';
 
         $(this).html(html);
+
+        $.extend(this, {
+            onSelect: options.onSelect
+        });
+
+        $(this).find('.calendarview-day').click(function() {
+            if ($(this).html() != '') {
+                self.onSelect($(this).html(), new Date(options.year, options.month, $(this).html()));
+            }
+        });
     };
 })(jQuery);
