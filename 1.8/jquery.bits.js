@@ -145,16 +145,16 @@
 
             $(self).html('');
             $(self).append($table);
+
+            $(this).find('.calendarview-day').click(function() {
+                if ($(this).html() != '') {
+                    self.onSelect($(this).html(), new Date(options.year, options.month, $(this).html()));
+                }
+            });
         }
 
         $.extend(this, {
             onSelect: options.onSelect
-        });
-
-        $(this).find('.calendarview-day').click(function() {
-            if ($(this).html() != '') {
-                self.onSelect($(this).html(), new Date(options.year, options.month, $(this).html()));
-            }
         });
 
         render();
