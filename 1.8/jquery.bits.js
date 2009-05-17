@@ -87,8 +87,7 @@
         var options = $.extend(defaults, options);
 
         function daysInMonth(year, month) {
-            var dd = new Date(year, month, 0);
-            return dd.getDate();
+            return 32 - new Date(year, month, 32).getDate();
         }
 
         var firstDay = new Date(options.year, options.month, 1);
@@ -97,45 +96,43 @@
         var monthLength = daysInMonth(options.year, options.month);
 
         var monthName = options.monthsLabels[options.month];
-        var html = '<table class="calendarview">';
-        html += '<tr><th colspan="7" class="calendarview-title">';
-        html += monthName + "&nbsp;" + options.year;
-        html += '</th></tr>';
-        html += '<tr class="calendarview-header">';
+
+        var $table = $('<table class="calendarview"><thead><tr><th colspan="7" class="calendarview-title">' + monthName + "&nbsp;" + options.year + '</th></tr></thead></table>');
+
+        var $weekDays = $('<tr class="calendarview-header"></tr>');
         for (var i = 0; i <= 6; i++) {
-            html += '<td class="calendarview-header-day">';
-            html += options.daysLabels[i];
-            html += '</td>';
+            var $td = $('<td class="calendarview-header-day"></td>');
+            $td.html(options.daysLabels[i]);
+            $weekDays.append($td);
         }
-        html += '</tr><tr>';
+        $table.append($weekDays);
 
-        // fill in the days
         var day = 1;
-        // this loop is for is weeks (rows)
-        for (var i = 0; i < 9; i++) {
-            // this loop is for weekdays (cells)
-            for (var j = 0; j <= 6; j++) {
-                html += '<td class="calendarview-day';
-                if (options.busyDays.exists(new Date(options.year, options.month, day).format('mm/dd/yyyy'))) {
-                    html += ' caledarview-busy';
-                }
-                html += '">';
-                if (day <= monthLength && (i > 0 || j >= startingDay)) {
-                    html += day;
-                    day++;
-                }
-                html += '</td>';
-            }
-            // stop making rows if we've run out of days
-            if (day > monthLength) {
-                break;
-            } else {
-                html += '</tr><tr>';
-            }
-        }
-        html += '</tr></table>';
+        for (var row = 0; row <= (Math.floor(monthLength / 7) + 1); row++) {
+            var $tr = $('<tr></tr>');
 
-        $(this).html(html);
+            for (var col = 0; col <= 6; col++) {
+                var $td = $('<td></td>');
+                var weekDayNumber = new Date(options.year, options.month, day).getDay();
+
+                if (day <= monthLength && (row > 0 || col >= startingDay)) {
+                    $td.html(day);
+                    console.log(day + ' of ' + monthLength);
+                    day++;                    
+
+                    $td.addClass('calendarview-day');
+
+                    if (options.busyDays.exists(new Date(options.year, options.month, day).format('mm/dd/yyyy'))) {
+                        $td.addClass('caledarview-busy');
+                    }
+                }
+
+                $tr.append($td);
+            }
+            $table.append($tr);
+        }
+
+        $(this).append($table);
 
         $.extend(this, {
             onSelect: options.onSelect
