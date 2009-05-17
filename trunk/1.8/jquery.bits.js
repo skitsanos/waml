@@ -86,53 +86,63 @@
 
         var options = $.extend(defaults, options);
 
+        $.fn.extend({
+            update: function(dates) {
+                options.busyDays = dates;
+                render();
+            }
+
+        });
+
         function daysInMonth(year, month) {
             return 32 - new Date(year, month, 32).getDate();
         }
 
-        var firstDay = new Date(options.year, options.month, 1);
-        var startingDay = firstDay.getDay();
+        function render() {
+            var firstDay = new Date(options.year, options.month, 1);
+            var startingDay = firstDay.getDay();
 
-        var monthLength = daysInMonth(options.year, options.month);
+            var monthLength = daysInMonth(options.year, options.month);
 
-        var monthName = options.monthsLabels[options.month];
+            var monthName = options.monthsLabels[options.month];
 
-        var $table = $('<table class="calendarview"><thead><tr><th colspan="7" class="calendarview-title">' + monthName + "&nbsp;" + options.year + '</th></tr></thead></table>');
+            var $table = $('<table class="calendarview"><thead><tr><th colspan="7" class="calendarview-title">' + monthName + "&nbsp;" + options.year + '</th></tr></thead></table>');
 
-        var $weekDays = $('<tr class="calendarview-header"></tr>');
-        for (var i = 0; i <= 6; i++) {
-            var $td = $('<td class="calendarview-header-day"></td>');
-            $td.html(options.daysLabels[i]);
-            $weekDays.append($td);
-        }
-        $table.append($weekDays);
-
-        var day = 1;
-        for (var row = 0; row <= (Math.floor(monthLength / 7) + 1); row++) {
-            var $tr = $('<tr></tr>');
-
-            for (var col = 0; col <= 6; col++) {
-                var $td = $('<td></td>');
-                var weekDayNumber = new Date(options.year, options.month, day).getDay();
-
-                if (day <= monthLength && (row > 0 || col >= startingDay)) {
-                    $td.html(day);
-                    console.log(day + ' of ' + monthLength);
-                    day++;                    
-
-                    $td.addClass('calendarview-day');
-
-                    if (options.busyDays.exists(new Date(options.year, options.month, day).format('mm/dd/yyyy'))) {
-                        $td.addClass('caledarview-busy');
-                    }
-                }
-
-                $tr.append($td);
+            var $weekDays = $('<tr class="calendarview-header"></tr>');
+            for (var i = 0; i <= 6; i++) {
+                var $td = $('<td class="calendarview-header-day"></td>');
+                $td.html(options.daysLabels[i]);
+                $weekDays.append($td);
             }
-            $table.append($tr);
-        }
+            $table.append($weekDays);
 
-        $(this).append($table);
+            var day = 1;
+            for (var row = 0; row <= (Math.floor(monthLength / 7) + 1); row++) {
+                var $tr = $('<tr></tr>');
+
+                for (var col = 0; col <= 6; col++) {
+                    var $td = $('<td></td>');
+                    var weekDayNumber = new Date(options.year, options.month, day).getDay();
+
+                    if (day <= monthLength && (row > 0 || col >= startingDay)) {
+                        $td.html(day);                        
+
+                        $td.addClass('calendarview-day');
+
+                        if (options.busyDays.exists(new Date(options.year, options.month, day).format('mm/dd/yyyy'))) {
+                            $td.addClass('caledarview-busy');
+                        }
+                        day++;
+                    }
+
+                    $tr.append($td);
+                }
+                $table.append($tr);
+            }
+
+            $(self).html('');
+            $(self).append($table);
+        }
 
         $.extend(this, {
             onSelect: options.onSelect
@@ -143,5 +153,7 @@
                 self.onSelect($(this).html(), new Date(options.year, options.month, $(this).html()));
             }
         });
+
+        render();
     };
 })(jQuery);
