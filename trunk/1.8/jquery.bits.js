@@ -106,7 +106,7 @@
 
             var monthName = options.monthsLabels[options.month];
 
-            var $table = $('<table class="calendarview"><thead><tr><th colspan="7" class="calendarview-title">' + monthName + "&nbsp;" + options.year + '</th></tr></thead></table>');
+            var $table = $('<table class="calendarview" month="' + options.month + '" monthName="' + monthName + '"><thead><tr><th colspan="7" class="calendarview-title">' + monthName + "&nbsp;" + options.year + '</th></tr></thead></table>');
 
             var $weekDays = $('<tr class="calendarview-header"></tr>');
             for (var i = 0; i <= 6; i++) {
@@ -125,7 +125,7 @@
                     var weekDayNumber = new Date(options.year, options.month, day).getDay();
 
                     if (day <= monthLength && (row > 0 || col >= startingDay)) {
-                        $td.html(day);                        
+                        $td.html(day);
 
                         $td.addClass('calendarview-day');
 
