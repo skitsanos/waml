@@ -132,7 +132,7 @@
                         });
 
                         if (options.busyDays.exists(new Date(options.year, options.month, day).format('mm/dd/yyyy'))) {
-                            $td.addClass('caledarview-busy');
+                            $td.addClass('calendarview-busy');
                         }
                         day++;
                     }
