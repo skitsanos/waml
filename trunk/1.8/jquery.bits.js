@@ -66,12 +66,13 @@
     /*
     Calendar view
     */
-    jQuery.fn.calendarView = function() {
+    jQuery.fn.calendarView = function(options) {
         var defaults = {
             daysLabels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
             monthsLabels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
             month: new Date().getMonth(),
-            year: new Date().getFullYear()
+            year: new Date().getFullYear(),
+            busyDays: []
         };
 
         var options = $.extend(defaults, options);
@@ -81,22 +82,19 @@
             return dd.getDate();
         }
 
-        // get first day of month
-        var firstDay = new Date(this.year, this.month, 1);
+        var firstDay = new Date(options.year, options.month, 1);
         var startingDay = firstDay.getDay();
 
-        // find number of days in month
-        var monthLength = daysInMonth();
+        var monthLength = daysInMonth(options.year, options.month);
 
-        // do the header
-        var monthName = options.monthsLabels[this.month]
-        var html = '<table class="calendar-table">';
-        html += '<tr><th colspan="7">';
-        html += monthName + "&nbsp;" + this.year;
+        var monthName = options.monthsLabels[options.month];
+        var html = '<table class="calendarview">';
+        html += '<tr><th colspan="7" class="calendarview-title">';
+        html += monthName + "&nbsp;" + options.year;
         html += '</th></tr>';
-        html += '<tr class="calendar-header">';
+        html += '<tr class="calendarview-header">';
         for (var i = 0; i <= 6; i++) {
-            html += '<td class="calendar-header-day">';
+            html += '<td class="calendarview-header-day">';
             html += options.daysLabels[i];
             html += '</td>';
         }
@@ -108,7 +106,11 @@
         for (var i = 0; i < 9; i++) {
             // this loop is for weekdays (cells)
             for (var j = 0; j <= 6; j++) {
-                html += '<td class="calendar-day">';
+                html += '<td class="calendar-day';
+                if (options.busyDays.exists(new Date(options.year, options.month, day).format('mm/dd/yyyy'))) {
+                    html += ' caledarview-busy';
+                }
+                html += '">';
                 if (day <= monthLength && (i > 0 || j >= startingDay)) {
                     html += day;
                     day++;
