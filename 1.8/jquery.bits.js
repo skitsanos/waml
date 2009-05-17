@@ -128,6 +128,9 @@
                         $td.html(day);
 
                         $td.addClass('calendarview-day');
+                        $td.attr({
+                            date: new Date(options.year, options.month, day).format('mm/dd/yyyy')
+                        });
 
                         if (options.busyDays.exists(new Date(options.year, options.month, day).format('mm/dd/yyyy'))) {
                             $td.addClass('caledarview-busy');
