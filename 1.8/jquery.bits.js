@@ -80,8 +80,7 @@
             monthsLabels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
             month: new Date().getMonth(),
             year: new Date().getFullYear(),
-            busyDays: [],
-            onSelect: function() { }
+            busyDays: []
         };
 
         var options = $.extend(defaults, options);
@@ -144,19 +143,9 @@
             }
 
             $(self).html('');
-            $(self).append($table);
-
-            $(self).find('.calendarview-day').click(function() {
-                if ($(self).html() != '') {
-                    self.onSelect($(self).html(), new Date(options.year, options.month, $(self).html()));
-                }
-            });
+            $(self).append($table);            
         }
-
-        $.extend(this, {
-            onSelect: options.onSelect
-        });
-
+        
         render();
     };
 })(jQuery);
