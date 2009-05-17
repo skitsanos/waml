@@ -146,9 +146,9 @@
             $(self).html('');
             $(self).append($table);
 
-            $(this).find('.calendarview-day').click(function() {
-                if ($(this).html() != '') {
-                    self.onSelect($(this).html(), new Date(options.year, options.month, $(this).html()));
+            $(self).find('.calendarview-day').click(function() {
+                if ($(self).html() != '') {
+                    self.onSelect($(self).html(), new Date(options.year, options.month, $(self).html()));
                 }
             });
         }
