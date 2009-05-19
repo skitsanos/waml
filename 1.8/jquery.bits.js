@@ -1,4 +1,68 @@
 (function($) {
+/*
+    $.distill("keyup,select,click", {
+        myobj: {
+            select: function() {
+                alert("textarea 1 select");
+            },
+            keyup: function() {
+                alert("textarea 1 keyup");
+            }
+        },
+        myobj2: {
+            click: function() {
+                alert("textarea 2 click");
+            },
+            keyup: function() {
+                alert("textarea 2 keyup");
+            }
+
+        }
+    });
+*/
+    $.distill = function(evType, obj) {
+
+        var dispatcher = function(ev, et, handler) {
+            try {
+                var classes = [];
+                var clsStr = $(ev.target || ev.srcElement).attr("class");
+                if (clsStr.indexOf(" ") > -1) {
+                    classes = clsStr.split(" ")
+                } else {
+                    classes = [clsStr];
+                }
+
+                for (var j in classes) {
+                    var hname = classes[j].replace(/com_/, '');
+
+                    if (handler[hname]) {
+                        if (handler[hname][et]) {
+                            handler[hname][et](ev, et);
+                        }
+                    }
+                }
+            } catch (e) { }
+        }
+
+        var evTypes;
+
+        if (evType.indexOf(",") > -1) {
+            evTypes = evType.split(",");
+        }
+        else {
+            evTypes = [evType];
+        }
+
+        for (var j in evTypes) {
+
+            $("body")[evTypes[j]]((function(evt) {
+                return function(e) {
+                    dispatcher(e, evt, obj);
+                }
+            })(evTypes[j]));
+        }
+    };
+
     $.fn.truncate = function(options) {
         var defaults = {
             length: 300,
@@ -68,6 +132,76 @@
         got: function(el, i, m) {
             return ($(el).html() == m[3]);
         }
+    });
+    /*
+    iframe
+    *
+ *  Usage:
+ *      $('a.iframe').iframe();
+ *
+ *
+ *
+ *  Notes:
+ *  -----
+ *
+ *  Options are passed to the 'flash' function using a single Object.  The options
+ *  Object is a hash of key/value pairs.  The following option keys are supported:
+ *
+ *  Options:
+ *  -------
+ *  width:      	width of iframe (default: 640)			w:640
+ *  height:      	height of iframe (default: 480)			h:480		
+ *  scrolling:   	auto									sc:auto
+ *  frameborder:	height of iframe (default: 0)			fb:0	
+ *  marginwidth:	margin of iframe (default: 0)			wm:0		
+ *  marginheight:	margin of iframe (default: 0)			hm:0	
+ *
+ *  * height, width, version and background values can be embedded in the classname using the following syntax:
+ *    <a class="iframe w:450 h:450 scr:no"></a>
+ */
+ 
+ jQuery.fn.iframe = function(options) {
+    return this.each(function() {
+        var $this = jQuery(this);
+        var cls = this.className;
+        
+        var opts = jQuery.extend({
+            frameborder:  ((cls.match(/fb:(\d+)/)||[])[1]) || 0,
+            marginwidth:  ((cls.match(/wm:(\d+)/)||[])[1]) || 0,
+            marginheight: ((cls.match(/hm:(\d+)/)||[])[1]) || 0,
+            width:        ((cls.match(/w:(\d+)/)||[])[1]) || 640,
+            height:       ((cls.match(/h:(\d+)/)||[])[1]) || 480,
+            scrolling:    ((cls.match(/sc:(\w+)/)||[])[1]) || "auto",
+            version:     '1,0,0,0',
+            cls:          cls,
+            src:          $this.attr('href') || $this.attr('src'),
+			id:			  $this.attr('id'),
+            caption:      $this.text(),
+            attrs:        {},
+            elementType:  'div',
+            xhtml:        true
+        }, options || {});
+        
+        var endTag = opts.xhtml ? ' />' : '>';
+
+        var a = ['<iframe src="' + opts.src + '"'];
+		if(opts.id){
+			a.push(' id="' + opts.id + '"');
+		}else{
+			a.push(' id="content_iframe"');
+		}
+		a.push(' frameborder="' + opts.frameborder + '"');
+		a.push(' marginwidth="' + opts.marginwidth + '"');
+		a.push(' marginheight="' + opts.marginheight + '"');
+		a.push(' width="' + opts.width + '"');
+		a.push(' height="' + opts.height + '"');
+		a.push(' scrolling="' + opts.scrolling + '"');
+		a.push(endTag);
+        
+        // convert anchor to span/div/whatever...
+        var $el = jQuery('<' + opts.elementType + ' class="' + opts.cls + '"></' + opts.elementType + '>');
+        $el.html(a.join(''));
+        $this.after($el).remove();
     });
     /*
     Calendar view
@@ -143,9 +277,9 @@
             }
 
             $(self).html('');
-            $(self).append($table);            
+            $(self).append($table);
         }
-        
+
         render();
     };
 })(jQuery);
