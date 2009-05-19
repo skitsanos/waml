@@ -184,7 +184,10 @@
 
             var endTag = opts.xhtml ? ' />' : '>';
 
-            var a = ['<iframe src="' + opts.src + '"'];
+            var a = ['<iframe '];
+            if (opts.src != undefined) {
+                a.push(' src="' + opts.src + '"');
+            }
             if (opts.id) {
                 a.push(' id="' + opts.id + '"');
             } else {
