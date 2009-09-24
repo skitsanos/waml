@@ -25,7 +25,7 @@ MySuggestBox.prototype.$getTagClose = function() {
 };
 */
 
-var label = Class.extend(AMLElement, {
+var label = Class.extend(AMLElement, {	
 	text: '',
 
 	$getTagOpen: function() {
@@ -36,6 +36,6 @@ var label = Class.extend(AMLElement, {
 		return '</div>';
 	}
 });
-//waml.setElement('label', label);
+waml.setElement('label', label);
 
 //waml.setElement("suggestbox", MySuggestBox);
