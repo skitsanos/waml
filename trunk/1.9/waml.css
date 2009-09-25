@@ -1,0 +1,5 @@
+@namespace waml url('http://www.skitsanos.com/ns/waml');
+
+waml|button {
+    cursor: pointer;
+}
