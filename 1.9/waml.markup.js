@@ -19,11 +19,10 @@ Waml.namespace.setElement('label', Waml.ui.label);
 Waml.ui.button = function(){};
 Waml.ui.button.prototype = new AMLElement;
 Waml.ui.button.prototype.$getTagOpen = function(){
-    return '<table border="0" cellpadding="0" cellspacing="0" class="x-btn-wrap"><tbody><tr>' +
-            '<td class="x-btn-left"><i>&#160;</i></td><td class="x-btn-center"><em unselectable="on"><button class="x-btn-text" type="{1}">'+this.getAttribute('text');
+    return '<table class="waml-button"><tr><td class="waml-button-tl"></td><td class="waml-button-tc"></td><td class="waml-button-tr"></td></tr><tr><td class="waml-button-ml"></td><td class="waml-button-ml">'+this.getAttribute('text');
 };
 Waml.ui.button.prototype.$getTagClose = function() {
-    return '</button></em></td><td class="x-btn-right"><i>&#160;</i></td></tr></tbody></table>';
+    return '</td><td class="waml-button-mr"></td></tr><tr><td class="waml-button-bl"></td><td class="waml-button-bc"></td><td class="waml-button-br"></td></tr></table>';
 };
 Waml.namespace.setElement('button', Waml.ui.button);
 
