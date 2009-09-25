@@ -1,41 +1,17 @@
-Waml.namespace = Class.extend(AMLNamespace, {});
+Waml.namespace = new AMLNamespace;
+ample.domConfig.setNamespace("http://www.skitsanos.com/ns/waml", Waml.namespace);
 
-var waml = new AMLNamespace;
-ample.domConfig.setNamespace("http://www.skitsanos.com/ns/waml", waml);
+Waml.ui = {};
 
-// Define component constructor
-var MySuggestBox = function() {
-
-}
-
- /*
-MySuggestBox.prototype = new AMLElement;
-
-// Define component members
-MySuggestBox.prototype.value = '0';
-MySuggestBox.prototype.setValue = function(sValue) {
-	this.value = sValue;
-}
-
-MySuggestBox.prototype.$getTagOpen = function() {
-	return '<div>value:' + this.value;
+Waml.ui.label = function() {
 };
-MySuggestBox.prototype.$getTagClose = function() {
-	return '</div>';
+Waml.ui.label.prototype = new AMLElement;
+Waml.ui.label.prototype.value = '';
+Waml.ui.label.prototype.$getTagOpen = function() {
+	return '<span xtype="waml-label">' + this.value;
 };
-*/
 
-var label = Class.extend(AMLElement, {	
-	text: '',
-
-	$getTagOpen: function() {
-		return '<div>' + text;
-	},
-
-	$getTagClose: function() {
-		return '</div>';
-	}
-});
-waml.setElement('label', label);
-
-//waml.setElement("suggestbox", MySuggestBox);
+Waml.ui.label.prototype.$getTagClose = function() {
+	return '</span>';
+};
+Waml.namespace.setElement('label', Waml.ui.label);
