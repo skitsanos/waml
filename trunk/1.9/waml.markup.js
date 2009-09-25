@@ -26,6 +26,8 @@ Waml.ui.button.prototype.$getTagClose = function() {
 };
 Waml.namespace.setElement('button', Waml.ui.button);
 
+
+//waml twitter bar? http://code.google.com/p/realtime-related-tweets-bar/downloads/list
 Waml.ui.el = function(){};
 Waml.ui.el.prototype = new AMLElement;
 Waml.ui.el.prototype.$getTagOpen = function(){};
