@@ -442,7 +442,7 @@ Date.prototype.add = function(/**String*/unit, /**Number*/value) {
 	return this;
 };
 
-Date.prototype.subtract = function(/**String*/unit, /**Number*/value) {
+Date.prototype.subtract = function(unit/*:String*/, value/*:Number*/) {
 
 	unit = unit.replace(/s$/).toLowerCase();
 
@@ -475,8 +475,7 @@ Date.prototype.subtract = function(/**String*/unit, /**Number*/value) {
 	return this;
 };
 
-Date.prototype.truncate = function(/**String*/to) {
-
+Date.prototype.truncate = function(unit/*:String*/) {
 	unit = unit.replace(/s$/).toLowerCase();
 
 	switch (unit) {
@@ -506,7 +505,6 @@ Date.prototype.truncate = function(/**String*/to) {
 		default:
 			break;
 	}
-
 	//return this;
 };
 
