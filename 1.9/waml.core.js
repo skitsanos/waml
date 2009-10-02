@@ -510,6 +510,26 @@ Date.prototype.truncate = function(/**String*/to) {
 	//return this;
 };
 
+Date.prototype.addGmtOffset = function(offset){
+	var d = this;
+	var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+
+	if (typeof(offset)=='string')
+	{
+		return new Date(utc + (3600000 * offset.split(':')[0])+(60000 * offset.split(':')[1]));
+	}
+	else
+	{
+		return new Date(utc + (3600000 * offset));
+	}
+};
+
+Date.prototype.addGmtOffsetByMinutes = function(offset){
+	var d = this;
+	var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+	return new Date(utc + (60000 * offset));
+};
+
 Date.prototype.getMondaySunday = function() {
 	//return [new Date(this).subtract('day', this.getDay() - 1), new Date(this).add('day', 7 - this.getDay())];
 }
@@ -595,3 +615,92 @@ var Waml = Class.extend({
 		return 'waml.core';
 	}
 });
+
+Waml.include = function(url, callback, dependency) {
+	var includeStates = {};
+
+	var script = document.createElement('script');
+	script.type = 'text/javascript';
+	script.onload = function() {
+		includeStates[url] = true;
+		if (callback)
+			callback.call(script);
+	};
+	script.onreadystatechange = function() {
+		if (this.readyState != "complete" && this.readyState != "loaded") return;
+		includeStates[url] = true;
+		if (callback)
+			callback.call(script);
+	};
+	script.src = url;
+	document.getElementsByTagName('head')[0].appendChild(script);
+
+	if (dependency) {
+		if (dependency.constructor != Array) {
+			dependency = [dependency];
+		}
+		setTimeout(function() {
+			var valid = true;
+			$.each(dependency, function(k, v) {
+				if (!v()) {
+					valid = false;
+					return false;
+				}
+			})
+			if (valid)
+				document.getElementsByTagName('head')[0].appendChild(script);
+			else
+				setTimeout(arguments.callee, 10);
+		}, 10);
+	}
+	else {
+		document.getElementsByTagName('head')[0].appendChild(script);
+	}
+	return function() {
+		return includeStates[url];
+	}
+};
+/**
+ * Require
+ * @param url URL of the resource to load
+ * @param callback Function to execute once resource load is complete (Optional)
+ */
+Waml.require = function(url, callback) {
+	if ($('script[src="' + url + '"]').length == 0) {
+		var script = document.createElement('script');
+		script.type = 'text/javascript';
+		script.onload = function() {
+			if (typeof (callback) == 'function') {
+				callback();
+			}
+		};
+		script.onreadystatechange = function() {
+			if (this.readyState != 'complete' && this.readyState != 'loaded') return;
+			if (typeof (callback) == 'function') {
+				callback();
+			}
+		};
+
+		script.src = url;
+		document.getElementsByTagName('head')[0].appendChild(script);
+	}
+	else {
+		if (typeof (callback) == 'function') {
+			callback();
+		}
+	}
+};
+
+Waml.requireStyles = function(url, callback) {
+	if ($('link[href="' + url + '"][rel="stylesheet"]').length == 0) {
+		var link = document.createElement('link');
+		link.type = 'text/css';
+		link.rel = 'stylesheet';
+		link.href = url;
+		document.getElementsByTagName('head')[0].appendChild(link);
+
+		if (typeof (callback) == 'function')
+			callback();
+
+	}
+};
