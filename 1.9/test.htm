@@ -7,60 +7,49 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:waml="http://www.skitsanos.com/ns/waml">
 <head>
-	<title></title>
+    <title></title>
     <meta name="author" content="Skitsanos"/>
 
-	<script type="text/javascript" src="ample/runtime.js"></script>
-	<script type="text/javascript" src="ample/languages/xhtml/xhtml.js"></script>
+    <script type="text/javascript" src="ample/runtime.js"></script>
+    <script type="text/javascript" src="ample/languages/xhtml/xhtml.js"></script>
 
-	<script type="text/javascript" src="waml.core.js"></script>
-	<script type="text/javascript" src="waml.markup.js"></script>
+    <script type="text/javascript" src="waml.core.js"></script>
+    <script type="text/javascript" src="waml.markup.js"></script>
 
     <link type="text/ample+css" rel="stylesheet" href="waml.css"/>
 
-	<!-- (1) Styling -->
-	<style type="text/ample+css">
-		@namespace "http://www.w3.org/1999/xhtml";
-		b {
-			color: red;
-		}
-	</style>
-	<!-- (2) Logic -->
-	<script type="text/javascript">
+    <!-- (1) Styling -->
+    <style type="text/ample+css">
+        @namespace "http://www.w3.org/1999/xhtml";
+        b {
+            color: red;
+        }
+    </style>
+    <!-- (2) Logic -->
+    <script type="text/javascript">
 
-		function alertHelloWorld(oEvent) {
-			alert('Element "' + oEvent.target.tagName + '" was clicked');
-		}
+        function alertHelloWorld(oEvent) {
+            alert('Element "' + oEvent.target.tagName + '" was clicked');
+        }
 
-        var currentUser = {
-            Username: '',
-            Locale: {
-                id: '',
-                code: 'ro',
-                label: 'Romanian'
-            },
-            Language: {
-                id: '',
-                code: 'en-US',
-                label: 'English (US)'
-            },
-            Timezone: {
-                id: '',
-                GMT: '+2',
-                label: 'Athens, Bucharest'
-            }
-        };
-	</script>
+
+        CSSHttpRequest.get(
+                "http://api.finance.xaviermedia.com/api/2009/10/07.xml",
+                function(response) {
+                    alert(response);
+                }
+        );
+    </script>
 </head>
 <body>
 <!-- (3) Layout -->
 <script type="application/ample+xml">
-	<b onclick="alertHelloWorld(event);">Hello World!</b>
-	<!--
-			http://www.stefhock.nl/?p=3
-			-->
-	<waml:label id='lblHi' text='hi there'/>
+    <b onclick="alertHelloWorld(event);">Hello World!</b>
+    <!--
+             http://www.stefhock.nl/?p=3
+             -->
+    <waml:label id='lblHi' text='hi there'/>
     <waml:button id="btnOk" text="OK"/>
 </script>
 </body>
-		</html>
+</html>
