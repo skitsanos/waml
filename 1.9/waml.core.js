@@ -123,12 +123,23 @@ String.prototype.stripTags = function() {
     return this.replace(/<([^>]+)>/g, '');
 };
 
-Number.max = function(a, b) {
+Number.prototype.max = function(a, b) {
     return a < b ? b : a;
 };
-
-Number.min = function(a, b) {
+Number.prototype.min = function(a, b) {
     return a > b ? b : a;
+};
+
+Number.prototype.roundWithDecimals = function(decimal_points) {
+    if (!decimal_points) return this.round();
+    if (this == 0) {
+        var decimals = "";
+        for (var i = 0; i < decimal_points; i++) decimals += "0";
+        return "0." + decimals;
+    }
+    var exponent = Math.pow(10, decimal_points);
+    var num = Math.round((this * exponent)).toString();
+    return num.slice(0, -1 * decimal_points) + "." + num.slice(-1 * decimal_points)
 };
 
 Math.mod = function(val, mod) {
