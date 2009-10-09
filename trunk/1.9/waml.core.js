@@ -721,25 +721,23 @@ Waml.Http.Status.NOT_FOUND = 404;
 Waml.Http.Status.SERVER_ERROR = 500;
 
 Waml.Http.Method = {POST: 'POST', GET: 'GET', OPTIONS: 'OPTIONS', HEAD: 'HEAD', PUT: 'PUT'};
+Waml.Http.ContentType = {FORM: 'application/x-www-form-urlencoded', JSON: 'application/json', XML: 'text/xml', PLAIN: 'text/plain'};
 
 Waml.Http.config = Class.extend({
     method: Waml.Http.Method.POST,
-    contentType: 'application/x-www-form-urlencoded'
+    contentType: Waml.Http.ContentType
 });
 
-Waml.Http.open = function(method, url, data, result, fault, config) {
+Waml.Http.open = function(url, data, result, fault, config) {
     if (config == undefined)
         config = new Waml.Http.config();
 
     var xr = new XMLHttpRequest();
-    xr.open(method, url, true);
-    if (method == config.method)
-    {
-        if (data !== undefined)
-            xr.setRequestHeader("Content-length", data.length);
-        xr.setRequestHeader("Content-Type", config.contentType);
-        xr.setRequestHeader("Connection", "close");
-    }
+    xr.open(config.method, url, true);
+    if (data !== undefined)
+        xr.setRequestHeader("Content-length", data.length);
+    xr.setRequestHeader("Content-Type", config.contentType);
+    xr.setRequestHeader("Connection", "close");
 
     xr.onreadystatechange = function() {
         switch (this.readyState) {
