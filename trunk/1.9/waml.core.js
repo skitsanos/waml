@@ -2,7 +2,6 @@
  * WAML
  * @author Skitsanos
  * @version 1.9
- * @date Sep 22, 2009
  */
 
 (function() {
