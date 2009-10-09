@@ -724,8 +724,8 @@ Waml.Http.Method = {POST: 'POST', GET: 'GET', OPTIONS: 'OPTIONS', HEAD: 'HEAD', 
 Waml.Http.ContentType = {FORM: 'application/x-www-form-urlencoded', JSON: 'application/json', XML: 'text/xml', PLAIN: 'text/plain'};
 
 Waml.Http.config = Class.extend({
-    method: Waml.Http.Method.POST,
-    contentType: Waml.Http.ContentType
+    method: Waml.Http.Method.GET,
+    contentType: Waml.Http.ContentType.FORM
 });
 
 Waml.Http.open = function(url, data, result, fault, config) {
@@ -735,11 +735,16 @@ Waml.Http.open = function(url, data, result, fault, config) {
     var xr = new XMLHttpRequest();
     xr.open(config.method, url, true);
     if (data !== undefined)
+    {
         xr.setRequestHeader("Content-length", data.length);
-    xr.setRequestHeader("Content-Type", config.contentType);
-    xr.setRequestHeader("Connection", "close");
-
-    xr.onreadystatechange = function() {
+        xr.setRequestHeader("Content-Type", config.contentType);
+        xr.setRequestHeader("Connection", "close");
+    }
+    xr.onloadprogress = function(e)
+    {
+        console.log(e);
+    }
+    xr.onreadystatechange = function() {        
         switch (this.readyState) {
             case XMLHttpRequest.LOADING:
                 window.status = "Loading...";
