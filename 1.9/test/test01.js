@@ -8,7 +8,7 @@ function alertHelloWorld(oEvent) {
 }
 
 
-Waml.Http.open('test.js',
+Waml.Http.open('test.htm',
         function(e) {
             console.log(e);
         },
