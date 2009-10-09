@@ -67,6 +67,42 @@
     };
 })();
 
+function iif(i, j, k) {
+    if (i) {
+        return j;
+    } else {
+        return k;
+    }
+}
+function addslashes(str) {
+    return (str + '').replace(/([\\"'])/g, "\\$1").replace(/\0/g, "\\0");
+}
+
+Object.prototype.isArray = function() {
+    return this.constructor == Array;
+};
+
+Object.prototype.isNumber = function() {
+    var strValidChars = "0123456789.-";
+    var strChar;
+    var blnResult = true;
+    if (this.constructor == String)
+    {
+        if (this.length == 0) return false;
+        //  test strString consists of valid characters listed above
+        for (i = 0; i < this.length && blnResult; i++)
+        {
+            strChar = this.charAt(i);
+            if (strValidChars.indexOf(strChar) == -1)
+            {
+                blnResult = false;
+            }
+        }
+        return blnResult;
+    }
+    if (this.constructor == Number) return true;
+};
+
 String.prototype.reverse = function() {
     var s = "";
     var i = this.length;
@@ -624,29 +660,64 @@ var Waml = Class.extend({
 });
 
 Waml.dump = function(arr, level) {
-    var dumped_text = "";
+    var _out = "";
     if (!level) level = 0;
-
+    if (level > 0) _out += '\n';
     //The padding given at the beginning of the line.
-    var level_padding = "";
-    for (var j = 0; j < level + 1; j++) level_padding += "    ";
+    var _padding = "";
+    for (var j = 0; j < level + 1; j++) _padding += "\t";
 
-    if (typeof(arr) == 'object') { //Array/Hashes/Objects
-        for (var item in arr) {
-            var value = arr[item];
+    if (typeof(arr) == 'object') {
+        _out += _padding + '{\n';
+        for (var key in arr) {
+            var value = arr[key];
+            console.log(key.isNumber() + ' ' + key)
+            _out += _padding + iif(key.isNumber(), '[' + key + ']', key) + iif(typeof(arr[key]) == 'function', '()', '');
+            switch (typeof(arr[key])) {
+                case 'function':
+                    _out += '\n';
+                    break;
 
-            if (typeof(value) == 'object') { //If it is an array,
-                dumped_text += level_padding + "'" + item + "' ...\n";
-                dumped_text += dump(value, level + 1);
-            } else {
-                dumped_text += level_padding + "'" + item + "' => \"" + value + "\"\n";
+                default:
+                    if (arr[key].isArray())
+                    {
+                        _out += ': ' + Waml.dump(value, level + 1) + '\n';
+                    }
+                    else
+                    {
+                        if (typeof(arr[key]) == 'object')
+                        {
+                            _out += +'-- \n' + Waml.dump(value, level + 1);
+                        }
+                        else
+                        {
+                            if (typeof(value) == 'string')
+                            {
+                                _out += ' = "' + value + '"\n';
+                            }
+                            else
+                            {
+                                _out += ' = ' + value + '\n';
+                            }
+                        }
+                    }
+                    break;
             }
         }
-    } else { //Stings/Chars/Numbers etc.
-        dumped_text = "===>" + arr + "<===(" + typeof(arr) + ")";
+        _out += _padding + '}\n';
     }
-    console.log(dumped_text);
-    return dumped_text;
+    else
+    {
+        if (typeof(value) == 'string')
+        {
+            _out = arr + ' [' + typeof(arr) + '] = "' + value + '"';
+        }
+        else
+        {
+            _out = arr + ' [' + typeof(arr) + '] = ' + value;
+        }
+    }
+    return _out;
 };
 
 Waml.include = function(url, callback, dependency) {
