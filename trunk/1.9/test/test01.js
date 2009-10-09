@@ -8,10 +8,12 @@ function alertHelloWorld(oEvent) {
 }
 
 
-Waml.Http.open('test.htm',
+Waml.Http.open('data.xml', null,
         function(e) {
+            console.log('result');
             console.log(e);
         },
-        function(e) {
-            console.log(e);
+        function(xr, ex) {
+            console.log('fault');
+            console.log(ex);
         });

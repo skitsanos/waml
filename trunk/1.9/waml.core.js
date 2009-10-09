@@ -713,12 +713,6 @@ Waml.requireStyles = function(url, callback) {
 if (!Waml.Http) {
     Waml.Http = {};
 }
-if (!Waml.Http.Status) {
-    Waml.Http.Status = {};
-}
-Waml.Http.Status.OK = 200;
-Waml.Http.Status.NOT_FOUND = 404;
-Waml.Http.Status.SERVER_ERROR = 500;
 
 Waml.Http.Method = {POST: 'POST', GET: 'GET', OPTIONS: 'OPTIONS', HEAD: 'HEAD', PUT: 'PUT'};
 Waml.Http.ContentType = {FORM: 'application/x-www-form-urlencoded', JSON: 'application/json', XML: 'text/xml', PLAIN: 'text/plain'};
@@ -734,46 +728,32 @@ Waml.Http.open = function(url, data, result, fault, config) {
 
     var xr = new XMLHttpRequest();
     xr.open(config.method, url, true);
-    if (data !== undefined)
+    if (data !== undefined & data != null)
     {
         xr.setRequestHeader("Content-length", data.length);
         xr.setRequestHeader("Content-Type", config.contentType);
         xr.setRequestHeader("Connection", "close");
     }
-    xr.onloadprogress = function(e)
-    {
-        console.log(e);
-    }
-    xr.onreadystatechange = function() {        
-        switch (this.readyState) {
-            case XMLHttpRequest.LOADING:
-                window.status = "Loading...";
-                break;
-
-            case XMLHttpRequest.DONE:
-                switch (xr.status) {
-                    case Waml.Http.Status.OK:
-                        result(xr);
-                        break;
-                    case Waml.Http.Status.NOT_FOUND:
-                        fault(xr);
-                        break;
-                    case Waml.Http.Status.SERVER_ERROR:
-                        fault(xr);
-                        break;
-                    default:
-                        fault(xr);
-                        break;
-                }
-                break;
-        }
+    xr.onerror = function() {
+        fault(xr);
     };
-    if (data !== undefined)
+    xr.onload = function() {
+        result(xr);
+    };
+
+    try
     {
-        xr.send(data);
+        if (data !== undefined)
+        {
+            xr.send(data);
+        }
+        else
+        {
+            xr.send(null);
+        }
     }
-    else
+    catch  (ex)
     {
-        xr.send(null);
+        fault(xr, {message: ex.message, name: ex.name, filename: ex.filename});
     }
 };
