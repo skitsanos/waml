@@ -33,12 +33,13 @@
         }
 
 
-        CSSHttpRequest.get(
-                "http://api.finance.xaviermedia.com/api/2009/10/07.xml",
-                function(response) {
-                    alert(response);
-                }
-        );
+        Waml.Http.open('test.js',
+                function(e) {
+                    console.log(e);
+                },
+                function(e) {
+                    console.log(e);
+                })
     </script>
 </head>
 <body>
@@ -51,5 +52,6 @@
     <waml:label id='lblHi' text='hi there'/>
     <waml:button id="btnOk" text="OK"/>
 </script>
-</body>
-</html>
+<
+/body>
+        < /html>
