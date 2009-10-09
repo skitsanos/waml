@@ -135,11 +135,11 @@ Number.prototype.roundWithDecimals = function(decimal_points) {
     if (this == 0) {
         var decimals = "";
         for (var i = 0; i < decimal_points; i++) decimals += "0";
-        return "0." + decimals;
+        return Number("0." + decimals);
     }
     var exponent = Math.pow(10, decimal_points);
     var num = Math.round((this * exponent)).toString();
-    return num.slice(0, -1 * decimal_points) + "." + num.slice(-1 * decimal_points)
+    return Number(num.slice(0, -1 * decimal_points) + "." + num.slice(-1 * decimal_points));
 };
 
 Math.mod = function(val, mod) {
