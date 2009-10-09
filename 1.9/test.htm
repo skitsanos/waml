@@ -26,21 +26,7 @@
         }
     </style>
     <!-- (2) Logic -->
-    <script type="text/javascript">
-
-        function alertHelloWorld(oEvent) {
-            alert('Element "' + oEvent.target.tagName + '" was clicked');
-        }
-
-
-        Waml.Http.open('test.js',
-                function(e) {
-                    console.log(e);
-                },
-                function(e) {
-                    console.log(e);
-                })
-    </script>
+    <script type="text/javascript" src="test/test01.js"></script>
 </head>
 <body>
 <!-- (3) Layout -->
@@ -52,6 +38,5 @@
     <waml:label id='lblHi' text='hi there'/>
     <waml:button id="btnOk" text="OK"/>
 </script>
-<
-/body>
-        < /html>
+</body>
+</html>
