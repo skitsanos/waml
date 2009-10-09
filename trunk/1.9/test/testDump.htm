@@ -8,16 +8,40 @@
 <head>
     <title></title>
     <meta name="author" content="Skitsanos"/>
+    <link rel="stylesheet" type="text/css" href="http://developer.yahoo.com/yui/3/assets/dpSyntaxHighlighter.css"/>
 
+    <script type="text/javascript" src="http://developer.yahoo.com/yui/3/assets/dpSyntaxHighlighter.js"></script>
     <script type="text/javascript" src="../waml.core.js"></script>
 
 </head>
 <body>
+
+<textarea id="code" name="code" class="HTML" cols="60" rows="1">
+</textarea> 
 <pre>
     <script type="text/javascript">
-        document.write(Waml.dump(Waml));
+        var obj = {
+            version: '1.0',
+            updated: -1,
+            data: [
+                {
+                    id:0,
+                    msg:'xxx'
+                },
+                {
+                    id: 22,
+                    msg: 'zzz'
+                }
+            ],
+            send: function() {
+            }
+        };
+
+        document.getElementById('code').innerHTML = Waml.dump(obj);
     </script>
 </pre>
-
+<script type="text/javascript">
+    dp.SyntaxHighlighter.HighlightAll('code');
+</script>
 </body>
 </html>
