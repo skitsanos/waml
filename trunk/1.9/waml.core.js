@@ -671,7 +671,6 @@ Waml.dump = function(arr, level) {
         _out += _padding + '{\n';
         for (var key in arr) {
             var value = arr[key];
-            console.log(key.isNumber() + ' ' + key)
             _out += _padding + iif(key.isNumber(), '[' + key + ']', key) + iif(typeof(arr[key]) == 'function', '()', '');
             switch (typeof(arr[key])) {
                 case 'function':
@@ -679,7 +678,7 @@ Waml.dump = function(arr, level) {
                     break;
 
                 default:
-                    if (arr[key].isArray())
+                    if (arr[key] != null && arr[key].isArray())
                     {
                         _out += ': ' + Waml.dump(value, level + 1) + '\n';
                     }
@@ -687,7 +686,7 @@ Waml.dump = function(arr, level) {
                     {
                         if (typeof(arr[key]) == 'object')
                         {
-                            _out += +'-- \n' + Waml.dump(value, level + 1);
+                            _out += Waml.dump(value, level + 1);
                         }
                         else
                         {
