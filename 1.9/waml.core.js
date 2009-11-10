@@ -81,7 +81,7 @@ function addslashes(str) {
 Object.prototype.isArray = function() {
     return this.constructor == Array;
 };
-
+/*
 Object.prototype.isNumber = function() {
     var strValidChars = "0123456789.-";
     var strChar;
@@ -102,7 +102,7 @@ Object.prototype.isNumber = function() {
     }
     if (this.constructor == Number) return true;
 };
-
+*/
 String.prototype.reverse = function() {
     var s = "";
     var i = this.length;
@@ -178,6 +178,17 @@ Number.prototype.roundWithDecimals = function(decimal_points) {
     return Number(num.slice(0, -1 * decimal_points) + "." + num.slice(-1 * decimal_points));
 };
 
+Number.prototype.nint = function(val) {
+	if ((this / val).toString().indexOf('.') && Math.round(this / val) < this / val)
+	{
+		return Math.round(this / val) + 1;
+	}
+	else
+	{
+		return Math.round(this / val);
+	}
+};
+
 Math.mod = function(val, mod) {
     if (val < 0) {
         while (val < 0) val += mod;
@@ -190,6 +201,20 @@ Math.mod = function(val, mod) {
 /*
  * Extended Arrays
  */
+
+Array.prototype.max = function() {
+	var max = this[0];
+	var len = this.length;
+	for (var i = 1; i < len; i++) if (this[i] > max) max = this[i];
+	return max;
+};
+Array.prototype.min = function() {
+	var min = this[0];
+	var len = this.length;
+	for (var i = 1; i < len; i++) if (this[i] < min) min = this[i];
+	return min;
+};
+
 Array.prototype.sortNum = function() {
     return this.sort(function(a, b) {
         return a - b;
